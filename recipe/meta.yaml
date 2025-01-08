@@ -1,6 +1,5 @@
 {% set name = "geohash2" %}
 {% set version = "1.1" %}
-{% set sha256 = "0ed0583b1f4fc329f96d807c9a4cd895c7eed2c35479ac7b4a50725249997bda" %}
 
 
 package:
@@ -8,19 +7,19 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 0ed0583b1f4fc329f96d807c9a4cd895c7eed2c35479ac7b4a50725249997bda
 
 build:
   noarch: python
   number: 1
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python {{ python_min }}
     - setuptools
+    - pip
   run:
     - python >={{ python_min }}
 
